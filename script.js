@@ -3,6 +3,7 @@ const input = document.getElementById('texto-tarefa');
 const list = document.getElementById('lista-tarefas');
 const btnAdd = document.getElementById('criar-tarefa');
 const btnRemove = document.getElementById('apaga-tudo');
+const btnRmFinished = document.getElementById('remover-finalizados');
 
 btnAdd.addEventListener('click', () => {
   const li = document.createElement('li');
@@ -30,5 +31,12 @@ btnRemove.addEventListener('click', () => {
   for (let i = 0; i < remove.length; i += 1) {
     const index = remove[i];
     index.remove();
+  }
+});
+
+btnRmFinished.addEventListener('click', () => {
+  const liClicket = document.querySelectorAll('.completed');
+  for (let li of liClicket) {
+    li = li.remove();
   }
 });

@@ -1,38 +1,24 @@
-const fatherOl = document.querySelector('ol');
-const button = document.querySelector('button');
-const input = document.querySelector('input');
+const input = document.getElementById('texto-tarefa');
+const list = document.getElementById('lista-tarefas');
+const btnAdd = document.getElementById('criar-tarefa');
 
-function addElement() {
-  const lis = document.createElement('li');
-  lis.innerText = input.value;
-  fatherOl.appendChild(lis);
-  input.value = '';
-}
-button.addEventListener('click', addElement);
+btnAdd.addEventListener('click', () => {
+  const li = document.createElement('li');
+  li.innerText = input.value;
+  list.appendChild(li);
+  input.value = null;
+});
 
-// adicona backgroundColor nas li clicadas
-function changeColor(addGrey) {
-  const addColor = addGrey.target;
-  addColor.classList.add('grey');
-}
-fatherOl.addEventListener('click', changeColor);
+list.addEventListener('click', (event) => {
+  const liClicket = list.childNodes;
+  const events = event.target;
+  for (let li of liClicket) {
+    li = li.classList.remove('grey');
+  }
+  events.classList.add('grey');
+});
 
-function removeColor(rmGrey) {
-  const techElement = document.querySelector('.grey');
-  techElement.classList.remove('grey');
-  rmGrey.target.classList.add('grey');
-}
-fatherOl.addEventListener('click', removeColor);
-
-function doubleClicked(clicked) {
-  const test = clicked.target;
-  test.classList.add('completed');
-}
-fatherOl.addEventListener('dblclick', doubleClicked);
-
-function doubleDesclicked(clicked) {
-  const selectec = document.querySelector('.completed');
-  selectec.classList.remove('grey');
-  clicked.target.classList.add('grey');
-}
-fatherOl.addEventListener('dblclick', doubleDesclicked);
+list.addEventListener('dblclick', (complet) => {
+  const finished = complet.target;
+  finished.classList.toggle('completed');
+});

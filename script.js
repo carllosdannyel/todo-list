@@ -1,6 +1,8 @@
+/* eslint-disable no-restricted-syntax */
 const input = document.getElementById('texto-tarefa');
 const list = document.getElementById('lista-tarefas');
 const btnAdd = document.getElementById('criar-tarefa');
+const btnRemove = document.getElementById('apaga-tudo');
 
 btnAdd.addEventListener('click', () => {
   const li = document.createElement('li');
@@ -10,7 +12,7 @@ btnAdd.addEventListener('click', () => {
 });
 
 list.addEventListener('click', (event) => {
-  const liClicket = list.childNodes;
+  const liClicket = list.children;
   const events = event.target;
   for (let li of liClicket) {
     li = li.classList.remove('grey');
@@ -21,4 +23,12 @@ list.addEventListener('click', (event) => {
 list.addEventListener('dblclick', (complet) => {
   const finished = complet.target;
   finished.classList.toggle('completed');
+});
+
+btnRemove.addEventListener('click', () => {
+  const remove = document.querySelectorAll('li');
+  for (let i = 0; i < remove.length; i += 1) {
+    const index = remove[i];
+    index.remove();
+  }
 });
